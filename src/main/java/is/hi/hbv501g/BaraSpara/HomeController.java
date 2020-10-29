@@ -57,4 +57,9 @@ public class HomeController {
         return "Velkominn";
     }
 
+    @RequestMapping(value="/lookAtExpense/{id}", method = RequestMethod.GET)
+    public String lookAtSavingType(@PathVariable("id") long id, Model model){
+        return "Velkominn";
+    }
+
 }
