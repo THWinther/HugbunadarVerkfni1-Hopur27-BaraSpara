@@ -47,7 +47,6 @@ public class HomeController {
         return "addSavingType";
     }
 
-    //TODO HTML síðu /delete
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteSavingType(@PathVariable("id") long id, Model model){
         SavingType sType = savingTypeService.findById(id).orElseThrow(
