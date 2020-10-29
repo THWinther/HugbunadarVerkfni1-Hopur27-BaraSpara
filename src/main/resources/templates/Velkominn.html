@@ -14,11 +14,13 @@
             <thead>
             <tr>
                 <th>Title</th>
+                <th>Max Spending</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="savingType : ${savingTypes}">
-                <td th:text="${savingType.title}"></td>
+                <td th:text="${savingType.title}"/>
+                <td th:text="${savingType.maxSpending}"/>
                 <td><a th:href="@{/delete/{id}(id=${savingType.id})}">Delete</a></td>
             </tr>
             </tbody>

@@ -14,11 +14,14 @@ public class SavingType {
 
     private String title;
 
+    private int maxSpending;
+
     public SavingType(){
     }
 
-    public SavingType(String title){
+    public SavingType(String title, int maxSpending){
         this.title = title;
+        this.maxSpending = maxSpending;
     }
 
     public long getId() {
@@ -35,5 +38,13 @@ public class SavingType {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getMaxSpending() {
+        return maxSpending;
+    }
+
+    public void setMaxSpending(int maxSpending) {
+        this.maxSpending = maxSpending;
     }
 }
