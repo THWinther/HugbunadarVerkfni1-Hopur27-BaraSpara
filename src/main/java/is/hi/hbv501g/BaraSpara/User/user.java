@@ -1,16 +1,20 @@
 package is.hi.hbv501g.BaraSpara.User;
 
+import java.util.List;
+
 public class user {
 
 
     private String userIdentity;
     private String userPasscode;
-    private UserRegister userRegister;
+    private String email;
+    private List<user> userRegister;
 
 
-    public user(String Id, String key){
+    public user(String Id, String key, String mail){
         userIdentity = Id;
         userPasscode = key;
+        email = mail;
     }
 
     public static String UserId(user User) {
@@ -21,7 +25,12 @@ public class user {
         return User.userPasscode;
     }
 
-    private boolean UserAuthenticate(String userPasscode, UserRegister userRegister){
+    public String getEmail(){
+        return email;
+    }
+
+
+    private boolean UserAuthenticate(String userPasscode, List<user> userRegister){
         //authenticate passcode, if incorrect return false
         return true;
     }
