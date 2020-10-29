@@ -12,7 +12,7 @@
     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 
     <label for="maxSpending">Max Spending</label>
-    <input type="number" step="1" th:field="*{maxSpending}" id="maxSpending" placeholder="0">
+    <input type="number" step="1" min="0" th:field="*{maxSpending}" id="maxSpending" placeholder="0">
     <span th:if="${#fields.hasErrors('maxSpending')}" th:errors="*{maxSpending}"></span>
 
     <input type="submit" value="Add Saving Type">
