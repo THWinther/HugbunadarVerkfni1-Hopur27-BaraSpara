@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import java.util.Optional;
 
 
 @Controller
@@ -59,7 +59,10 @@ public class HomeController {
 
     @RequestMapping(value="/lookAtExpense/{id}", method = RequestMethod.GET)
     public String lookAtSavingType(@PathVariable("id") long id, Model model){
-        return "Velkominn";
+        Optional<SavingType> sType = savingTypeService.findById(id);
+        if(sType.isEmpty()) return "Velkominn";
+        model.addAttribute("currentSavingType", sType.get());
+        return "lookAtExpense";
     }
 
 }
