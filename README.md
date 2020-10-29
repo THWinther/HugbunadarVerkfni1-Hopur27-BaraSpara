@@ -1,3 +1,4 @@
 # HugbunadarVerkfni1-Hopur27-BaraSpara
-Búið til fyrir Java 15  
-Mæli með intelij
+Þetta er síða sem á að hjálpa fólki að spara með því að skrá niður eyðslu sína
+
+## Þarf Java 15 og intellij
