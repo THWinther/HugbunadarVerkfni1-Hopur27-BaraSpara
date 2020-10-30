@@ -8,3 +8,11 @@ td{
     padding: 1.5rem 1rem 1rem 1rem;
 }
 
+table{
+    border-style: dotted;
+    border-color: #03dac5;
+}
+
+a{
+    color: #03dac5;
+}
