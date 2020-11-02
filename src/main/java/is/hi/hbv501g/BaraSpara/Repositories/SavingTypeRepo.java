@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface SavingTypeRepo extends JpaRepository<SavingType, Long> {
 
-    SavingType save(SavingType savingType); // Vistar Saving týðuna
+    SavingType save(SavingType savingType); // Vistar Saving týpuna
     void delete(SavingType savingType);     // Eyðir Saving úr gagnagrunni
     List<SavingType> findAll();             // Skilar öllum savings úr grunninum
     List<SavingType> findByTitle(String title);
