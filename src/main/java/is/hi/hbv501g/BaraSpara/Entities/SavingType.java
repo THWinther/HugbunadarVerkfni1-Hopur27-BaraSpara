@@ -16,10 +16,12 @@ public class SavingType {
 
     private int maxSpending;
 
+    private String description;
+
     public SavingType(){
     }
 
-    public SavingType(String title, int maxSpending){
+    public SavingType(String title, int maxSpending, String description){
         this.title = title;
         this.maxSpending = maxSpending;
     }
@@ -46,5 +48,13 @@ public class SavingType {
 
     public void setMaxSpending(int maxSpending) {
         this.maxSpending = maxSpending;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
