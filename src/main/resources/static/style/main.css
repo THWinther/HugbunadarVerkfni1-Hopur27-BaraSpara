@@ -21,3 +21,18 @@ a{
     display: flex;
     flex-direction: column;
 }
+
+#title{
+    max-width: 20rem;
+}
+
+#maxSpending{
+    max-width: 5rem;
+    text-align: right;
+}
+
+#description{
+    min-height: 1rem;
+    max-width: 30rem;
+    text-align: start;
+}
