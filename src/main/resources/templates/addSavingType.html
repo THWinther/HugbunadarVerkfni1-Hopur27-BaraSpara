@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/addSavingType}" th:object="${savingType}" method="post">
+<form action="#" th:action="@{/addSavingType}" th:object="${savingType}" method="post" class="addSavingTypeForm">
 
     <label for="title">Title</label>
     <input type="text" th:field="*{title}" id="title" placeholder="Title" th:maxlength="30" maxlength="30">
@@ -17,7 +17,7 @@
     <input type="number" step="1" min="0" th:field="*{maxSpending}" id="maxSpending" placeholder="0" max="2147483647">
     <span th:if="${#fields.hasErrors('maxSpending')}" th:errors="*{maxSpending}"></span>
 
-    <label for="description">description</label>
+    <label for="description">Description</label>
     <input type="text" step="1" min="0" th:field="*{description}" id="description" placeholder="Describe your saving type" th:maxlength="256" maxlength="256">
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
 

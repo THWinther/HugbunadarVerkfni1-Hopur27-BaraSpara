@@ -16,3 +16,8 @@ table{
 a{
     color: #03dac5;
 }
+
+.addSavingTypeForm{
+    display: flex;
+    flex-direction: column;
+}
