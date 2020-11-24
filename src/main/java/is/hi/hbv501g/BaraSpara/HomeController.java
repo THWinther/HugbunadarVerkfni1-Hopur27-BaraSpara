@@ -2,6 +2,9 @@ package is.hi.hbv501g.BaraSpara;
 
 import is.hi.hbv501g.BaraSpara.Entities.SavingType;
 import is.hi.hbv501g.BaraSpara.Services.SavingTypeService;
+import is.hi.hbv501g.BaraSpara.Entities.Transaction;
+import is.hi.hbv501g.BaraSpara.Services.TransactionService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 
     private SavingTypeService savingTypeService;
+    private TransactionService transactionService;
+
     @Autowired
-    public HomeController(SavingTypeService savingTypeService){
+    public HomeController(SavingTypeService savingTypeService, TransactionService transactionService){
         this.savingTypeService=savingTypeService;
+        this.transactionService=transactionService;
     }
 
     @RequestMapping("/")
@@ -55,6 +61,42 @@ public class HomeController {
 
         savingTypeService.delete(sType);
         model.addAttribute("savingTypes", savingTypeService.findAll());
+        return "Velkominn";
+    }
+
+    @RequestMapping("/transactions")
+    public String Transaction(Model model){
+        model.addAttribute("transactions", transactionService.findAll());
+        return "Velkominn";
+    }
+
+    @RequestMapping(value = "/transactions/addTransaction", method = RequestMethod.POST)
+    //TODO Add @Valid and fix import and error handling
+    public String addTransaction(Transaction transaction, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "addTransaction";
+        }
+
+        //saves transaction and returns updated list of transactions
+        transactionService.save(transaction);
+        model.addAttribute("transactions", transactionService.findAll());
+        return "Velkominn";
+    }
+
+    //TODO error handling og HTML síðu
+    @RequestMapping(value = "/transactions/addTransaction", method = RequestMethod.GET)
+    public String addTransactionForm(Transaction transaction){
+        return "addTransaction";
+    }
+
+    //TODO HTML síðu /delete
+    @RequestMapping(value = "/transactions/delete/{id}", method = RequestMethod.GET)
+    public String deleteTransaction(@PathVariable("id") long id, Model model){
+        Transaction sType = transactionService.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("Invalid transaction ID"));
+
+        transactionService.delete(sType);
+        model.addAttribute("transactions", transactionService.findAll());
         return "Velkominn";
     }
 
