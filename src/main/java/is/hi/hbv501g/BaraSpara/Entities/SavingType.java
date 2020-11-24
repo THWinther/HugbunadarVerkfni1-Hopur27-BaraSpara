@@ -24,6 +24,7 @@ public class SavingType {
     public SavingType(String title, int maxSpending, String description){
         this.title = title;
         this.maxSpending = maxSpending;
+        this.description = description;
     }
 
     public long getId() {

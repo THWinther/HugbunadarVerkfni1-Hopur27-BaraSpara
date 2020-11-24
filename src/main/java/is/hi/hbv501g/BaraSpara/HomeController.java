@@ -1,7 +1,9 @@
 package is.hi.hbv501g.BaraSpara;
 
 import is.hi.hbv501g.BaraSpara.Entities.SavingType;
+import is.hi.hbv501g.BaraSpara.Entities.Transaction;
 import is.hi.hbv501g.BaraSpara.Services.SavingTypeService;
+import is.hi.hbv501g.BaraSpara.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -17,10 +20,15 @@ import java.util.Optional;
 public class HomeController {
 
     private SavingTypeService savingTypeService;
+    private TransactionService transactionService;
+
     @Autowired
-    public HomeController(SavingTypeService savingTypeService){
+    public HomeController(SavingTypeService savingTypeService, TransactionService transactionService){
         this.savingTypeService=savingTypeService;
+        this.transactionService = transactionService;
     }
+
+
 
     @RequestMapping("/")
     public String Home(Model model){
@@ -61,7 +69,9 @@ public class HomeController {
     public String lookAtSavingType(@PathVariable("id") long id, Model model){
         Optional<SavingType> sType = savingTypeService.findById(id);
         if(sType.isEmpty()) return "Velkominn";
+        List<Transaction> transactions = transactionService.findBySavingTypeId(sType.get().getId());
         model.addAttribute("currentSavingType", sType.get());
+        model.addAttribute("transactions", transactions);
         return "lookAtExpense";
     }
 
