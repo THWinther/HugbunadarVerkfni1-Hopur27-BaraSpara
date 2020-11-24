@@ -40,12 +40,12 @@
             <tbody>
             <tr th:each="transaction : ${transactions}">
                 <td th:text="${transaction.name}"></td>
-                <td><a th:href="@{/delete/{id}(id=${transaction.id})}">Delete</a></td>
+                <td><a th:href="@{/transactions/delete/{id}(id=${transaction.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/addTransaction">Add a Transaction</a></p>
+    <p><a href="/transactions">Add a Transaction</a></p>
 </div>
 
 </body>

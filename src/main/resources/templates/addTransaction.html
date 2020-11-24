@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="#" th:action="@{/addTransaction}" th:object="${transaction}" method="post">
+<form action="#" th:action="@{/transactions/addTransaction}" th:object="${transaction}" method="post">
     <label for="name">Name</label>
     <input type="text" th:field="*{name}" id="name" placeholder="Name">
     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
