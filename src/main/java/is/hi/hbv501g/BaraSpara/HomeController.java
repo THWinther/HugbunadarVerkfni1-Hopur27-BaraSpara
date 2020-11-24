@@ -75,4 +75,26 @@ public class HomeController {
         return "lookAtExpense";
     }
 
+    @RequestMapping(value = "/lookAtExpense/addTransaction/{id}", method = RequestMethod.POST)
+    public String addTransaction(@PathVariable("id") long id, Transaction transaction, BindingResult result, Model model){
+        transactionService.save(transaction);
+        Optional<SavingType> sType = savingTypeService.findById(id);
+        if(sType.isEmpty()) return "Velkominn";
+        List<Transaction> transactions = transactionService.findBySavingTypeId(id);
+        model.addAttribute("currentSavingType", sType.get());
+        model.addAttribute("transactions", transactions);
+        return "lookAtExpense";
+
+    }
+
+    @RequestMapping(value = "/lookAtExpense/addTransaction/{id}", method = RequestMethod.GET)
+    public String addTransactionLook(@PathVariable("id") long id, Model model){
+        Optional<SavingType> sType = savingTypeService.findById(id);
+        if(sType.isEmpty()) return "Velkominn";
+        List<Transaction> transactions = transactionService.findBySavingTypeId(id);
+        model.addAttribute("currentSavingType", sType.get());
+        model.addAttribute("transactions", transactions);
+        return "lookAtExpense";
+    }
+
 }

@@ -6,6 +6,8 @@ import is.hi.hbv501g.BaraSpara.Services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,13 +38,17 @@ public class TransactionServiceImplementation implements TransactionService {
 
     @Override
     public List<Transaction> findBySavingTypeId(long savingTypeId) {
-        List<Transaction> op =repo.findAll();
+        List<Transaction> intinalList =repo.findAll();
 
-        op = op.stream().filter(
-                t-> t.getSavingTypeId()==savingTypeId).collect(Collectors.toList()
-        );
+        List<Transaction> returnList = new ArrayList<Transaction>();
 
-        return op;
+        for(int i =0; i<intinalList.size();i++){
+            if(intinalList.get(i).getSavingTypeId()==savingTypeId){
+                returnList.add(intinalList.get(i));
+            }
+        }
+
+        return returnList;
     }
 
 
