@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,27 +75,4 @@ public class HomeController {
         model.addAttribute("transactions", transactions);
         return "lookAtExpense";
     }
-
-    @RequestMapping(value = "/lookAtExpense/addTransaction/{id}", method = RequestMethod.POST)
-    public String addTransaction(@PathVariable("id") long id, Transaction transaction, BindingResult result, Model model){
-        transactionService.save(transaction);
-        Optional<SavingType> sType = savingTypeService.findById(id);
-        if(sType.isEmpty()) return "Velkominn";
-        List<Transaction> transactions = transactionService.findBySavingTypeId(id);
-        model.addAttribute("currentSavingType", sType.get());
-        model.addAttribute("transactions", transactions);
-        return "lookAtExpense";
-
-    }
-
-    @RequestMapping(value = "/lookAtExpense/addTransaction/{id}", method = RequestMethod.GET)
-    public String addTransactionLook(@PathVariable("id") long id, Model model){
-        Optional<SavingType> sType = savingTypeService.findById(id);
-        if(sType.isEmpty()) return "Velkominn";
-        List<Transaction> transactions = transactionService.findBySavingTypeId(id);
-        model.addAttribute("currentSavingType", sType.get());
-        model.addAttribute("transactions", transactions);
-        return "lookAtExpense";
-    }
-
 }
