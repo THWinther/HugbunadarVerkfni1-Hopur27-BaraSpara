@@ -26,6 +26,8 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
             <h3>Transactions</h3>
             <table>
                 <thead>
@@ -35,17 +37,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="transaction : ${transactions}">
-                    <td th:text="${transaction.when}"/>
-                    <td th:text="${transaction.Amount}"/>
+                <tr th:each="trans : ${transactions}">
+                    <td th:text="${trans.when}"/>
+                    <td th:text="${trans.Amount}"/>
                 </tr>
                 </tbody>
             </table>
-        </div>
+
+        <tr th:each="savingType : ${currentSavingType}">
+        <form action="#" th:action="@{/addTransaction/{id}(id=${savingType.id})}" th:object="${transaction}" method="post" class="addSavingTypeForm">
+
+            <label for="amount">Amount</label>
+            <input type="number" step="1" min="0" th:field="*{amount}" id="amount" placeholder="0" max="2147483647">
+            <input type="submit" value="Add Transaction">
+        </form>
+        </tr>
     </div>
-
-    <a href="/addTransaction">Add Transaction?</a>
-
 
     <a href="/">Return</a>
 

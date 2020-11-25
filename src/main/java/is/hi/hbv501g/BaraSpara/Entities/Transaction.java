@@ -28,8 +28,6 @@ public class Transaction {
         this.when = new Date();
     }
 
-
-
     public long getId() {
         return id;
     }
