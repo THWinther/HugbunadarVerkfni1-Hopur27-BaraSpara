@@ -2,18 +2,20 @@ package is.hi.hbv501g.BaraSpara;
 
 import is.hi.hbv501g.BaraSpara.Entities.SavingType;
 import is.hi.hbv501g.BaraSpara.Entities.Transaction;
+import is.hi.hbv501g.BaraSpara.Entities.User;
 import is.hi.hbv501g.BaraSpara.Services.SavingTypeService;
 import is.hi.hbv501g.BaraSpara.Services.TransactionService;
+import is.hi.hbv501g.BaraSpara.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Date;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +25,13 @@ public class HomeController {
 
     private SavingTypeService savingTypeService;
     private TransactionService transactionService;
+    private UserService userService;
 
     @Autowired
-    public HomeController(SavingTypeService savingTypeService, TransactionService transactionService){
+    public HomeController(SavingTypeService savingTypeService, TransactionService transactionService, UserService userService){
         this.savingTypeService=savingTypeService;
         this.transactionService = transactionService;
+        this.userService = userService;
     }
 
 
@@ -173,4 +177,60 @@ public class HomeController {
         return amountTotal;
     }
 
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String signUpGET(User user){
+        return "signup";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signUpPOST(@Valid User user, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "signup";
+        }
+        User exists = userService.findByUName(user.uName);
+        if(exists == null){
+            userService.save(user);
+        }
+        model.addAttribute("savingTypes", savingTypeService.findAll());
+        return "Velkominn";
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public String usersGET(Model model){
+        model.addAttribute("users", userService.findAll());
+        return "users";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGET(User user){
+        return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
+        if(result.hasErrors()){
+            return "login";
+        }
+        model.addAttribute("savingTypes",savingTypeService.findAll());
+        User exists = userService.login(user);
+        if(exists != null){
+            session.setAttribute("LoggedInUser", user);
+            return "redirect:/";
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
+    public String loggedinGET(HttpSession session, Model model){
+        model.addAttribute("savingTypes",savingTypeService.findAll());
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if(sessionUser  != null){
+            model.addAttribute("loggedinuser", sessionUser);
+            return "loggedInUser";
+        }
+        return "redirect:/";
+    }
 }
+
+
+
