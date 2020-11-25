@@ -31,13 +31,27 @@ public class HomeController {
     }
 
 
-
+    /**
+     * Þetta er fall sér um að bregðast við boði að sjá heimsíðu
+     * Síðunar
+     *
+     * @param model gagnamódel til að tala á milli html og Java
+     * @return skilal streng sem  segir að birta velkominn.html
+     */
     @RequestMapping("/")
     public String Home(Model model){
         model.addAttribute("savingTypes", savingTypeService.findAll());
         return "Velkominn";
     }
 
+    /**
+     * Þetta fall höndlar POST request til að bæta við nýju saving type
+     *
+     * @param savingType Klasi sem er verioð að vista
+     * @param result    Hlutur sem segir til hvort það voru eitthverjar villur
+     * @param model     gagnamódel til að tala á milli html og Java
+     * @return
+     */
     @RequestMapping(value = "/addSavingType", method = RequestMethod.POST)
     //TODO Add @Valid and fix import and error handling
     public String addSavingType(SavingType savingType, BindingResult result, Model model) {
@@ -47,11 +61,15 @@ public class HomeController {
 
         //Vistar nýju SavingType og skilar nýja listanum með model
         savingTypeService.save(savingType);
-        transactionService.save(new Transaction(savingType.getId(),0));
         model.addAttribute("savingTypes", savingTypeService.findAll());
         return "Velkominn";
     }
 
+    /**
+     * Meðhöndlar GET request þegar það er verið að biðja um sá síðu
+     * @param savingType
+     * @return Streng sem segir að nota addSavingType.html
+     */
     //TODO error handling og HTML síðu
     @RequestMapping(value = "/addSavingType", method = RequestMethod.GET)
     public String addSavingTypeForm(SavingType savingType){
