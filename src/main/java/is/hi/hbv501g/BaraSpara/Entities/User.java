@@ -17,7 +17,6 @@ public class User {
 
     public String password;
 
-
     @OneToMany(mappedBy = "user")
     private List<SavingType> savingTypes = new ArrayList<>();
 
@@ -29,8 +28,6 @@ public class User {
         this.savingTypes = savingTypes;
     }
 
-    public User() {
-    }
 
 
     public long getId() {

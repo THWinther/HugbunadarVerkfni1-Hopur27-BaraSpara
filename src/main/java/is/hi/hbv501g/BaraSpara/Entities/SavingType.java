@@ -1,9 +1,6 @@
 package is.hi.hbv501g.BaraSpara.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Þetta er Entity sem sér um að segja til um
@@ -24,13 +21,17 @@ public class SavingType {
 
     private String description;
 
+    @ManyToOne
+    private User user;
+
     public SavingType(){
     }
 
-    public SavingType(String title, int maxSpending, String description){
+    public SavingType(String title, int maxSpending, String description, User user){
         this.title = title;
         this.maxSpending = maxSpending;
         this.description = description;
+        this.user = user;
     }
 
     public long getId() {
@@ -63,5 +64,13 @@ public class SavingType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

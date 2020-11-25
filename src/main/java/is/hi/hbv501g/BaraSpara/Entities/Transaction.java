@@ -1,9 +1,6 @@
 package is.hi.hbv501g.BaraSpara.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -18,7 +15,6 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
 
     /**
      *  Þetta er id saving týpunar sem transaction er undir og er
@@ -71,4 +67,5 @@ public class Transaction {
     public void setWhen(Date when) {
         this.when = when;
     }
+
 }
