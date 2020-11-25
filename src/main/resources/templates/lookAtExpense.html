@@ -15,14 +15,18 @@
                 <tr>
                     <th>Title</th>
                     <th>Max Spending</th>
+                    <th>Spent</th>
                     <th>Description</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="savingType : ${currentSavingType}">
                     <td th:text="${savingType.title}">
                     <td th:text="${savingType.maxSpending}"/>
+                    <td th:text="${totalAmount}"/>
                     <td th:text="${savingType.description}"/>
+
                 </tr>
                 </tbody>
             </table>

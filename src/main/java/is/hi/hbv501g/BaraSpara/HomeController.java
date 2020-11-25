@@ -77,9 +77,10 @@ public class HomeController {
     }
 
 
-    //TODO eyða transactions líka
+
     /**
      * Sér um að eyða savingType sem hefur verið valið
+     * og þeirra transactions
      *
      * @param id id SavingType sem er verið að eyða
      * @param model gagnamódel til að tala á milli html og Java
@@ -115,6 +116,7 @@ public class HomeController {
         Optional<SavingType> sType = savingTypeService.findById(id);
         if(sType.isEmpty()) return "Velkominn";
         List<Transaction> transactions = transactionService.findBySavingTypeId(id);
+        model.addAttribute("totalAmount", totalTransactionAmount(transactions));
         model.addAttribute("currentSavingType", sType.get());
         model.addAttribute("transactions", transactions);
         model.addAttribute("transaction", new Transaction());
@@ -149,9 +151,20 @@ public class HomeController {
         Optional<SavingType> sType = savingTypeService.findById(id);
         if(sType.isEmpty()) return "Velkominn";
         List<Transaction> transactions = transactionService.findBySavingTypeId(id);
+        model.addAttribute("totalAmount", totalTransactionAmount(transactions));
         model.addAttribute("currentSavingType", sType.get());
         model.addAttribute("transactions", transactions);
         return "lookAtExpense";
+    }
+
+
+    public int totalTransactionAmount(List<Transaction> li){
+        int amountTotal = 0;
+
+        for(int i=0;i<li.size();i++){
+            amountTotal += li.get(i).getAmount();
+        }
+        return amountTotal;
     }
 
 }
