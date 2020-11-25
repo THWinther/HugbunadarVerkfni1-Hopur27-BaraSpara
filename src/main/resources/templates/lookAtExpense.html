@@ -34,12 +34,14 @@
                 <tr>
                     <th>Date</th>
                     <th>Amount</th>
+                    <th>Saving ID</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="trans : ${transactions}">
                     <td th:text="${trans.when}"/>
                     <td th:text="${trans.Amount}"/>
+                    <td th:text="${trans.savingTypeId}"/>
                 </tr>
                 </tbody>
             </table>
