@@ -6,12 +6,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
+/**
+ * Entity Klasi sem sér um að vista upplýsingar þegar notnadi bætir
+ * við eyðslu í saving type
+ */
+
+
 @Entity
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+
+    /**
+     *  Þetta er id saving týpunar sem transaction er undir og er
+     *  notað til að finna rétta Transaction
+     */
 
     private long savingTypeId=-1;
 

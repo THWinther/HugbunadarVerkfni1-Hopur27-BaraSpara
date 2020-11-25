@@ -50,7 +50,7 @@ public class HomeController {
      * @param savingType Klasi sem er verioð að vista
      * @param result    Hlutur sem segir til hvort það voru eitthverjar villur
      * @param model     gagnamódel til að tala á milli html og Java
-     * @return
+     * @return  ef það eru engar villur þá skilar það Velkominn.html
      */
     @RequestMapping(value = "/addSavingType", method = RequestMethod.POST)
     //TODO Add @Valid and fix import and error handling
@@ -76,6 +76,15 @@ public class HomeController {
         return "addSavingType";
     }
 
+
+    //TODO eyða transactions líka
+    /**
+     * Sér um að eyða savingType sem hefur verið valið
+     *
+     * @param id id SavingType sem er verið að eyða
+     * @param model gagnamódel til að tala á milli html og Java
+     * @return skilar aftur Velkominn.html
+     */
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteSavingType(@PathVariable("id") long id, Model model){
         SavingType sType = savingTypeService.findById(id).orElseThrow(
@@ -86,6 +95,13 @@ public class HomeController {
         return "Velkominn";
     }
 
+    /**
+     *  Sér um að sýna SavingType sem er valið og Transactions þeirra
+     *
+     * @param id id SavingType sem er verið að skoða
+     * @param model gagnamódel til að tala á milli html og Java
+     * @return  beðið um ap sýna lookAtExpense.html
+     */
     @RequestMapping(value="/lookAtExpense/{id}", method = RequestMethod.GET)
     public String lookAtSavingType(@PathVariable("id") long id, Model model){
         Optional<SavingType> sType = savingTypeService.findById(id);
@@ -98,12 +114,27 @@ public class HomeController {
         return "lookAtExpense";
     }
 
+
+    /** Sér um GET request fyrir addTransaction
+     *
+     * @param id id savinType sem er verið að skoða
+     * @param model gagnamódel til að tala á milli html og Java
+     * @return lookAtExpense.html
+     */
     @RequestMapping(value="/addTransaction/{id}", method = RequestMethod.GET)
     public String lookTransaction(@PathVariable("id") long id, Model model){
          return "lookAtExpense";
     }
 
-
+    /**
+     * Sér um POST request fyrir addTransaction
+     * Vistar Nýju Transaction sem notandi stimplar inn
+     *
+     * @param transaction transaction sem á að vista
+     * @param id    id af savingType sem er verið að skoða
+     * @param model gagnamódel til að tala á milli html og Java
+     * @return lookAtExpense.html
+     */
     @RequestMapping(value="/addTransaction/{id}", method = RequestMethod.POST)
     public String addTransaction(Transaction transaction, @PathVariable("id") long id, Model model){
         transactionService.save(new Transaction(id,transaction.getAmount()));

@@ -5,6 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Þetta er Entity sem sér um að segja til um
+ * hvað er verið að reyna að eyða minna í
+ */
+
+
 @Entity
 public class SavingType {
 
