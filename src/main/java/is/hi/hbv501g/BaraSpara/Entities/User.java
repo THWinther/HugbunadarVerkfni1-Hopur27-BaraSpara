@@ -1,16 +1,18 @@
 package is.hi.hbv501g.BaraSpara.Entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class User {
-
+    @Id
+    private String email;
 
     public String userIdentity;
     public String userPasscode;
-    public String email;
+
     private List<User> userRegister = new ArrayList<>();
 
 
