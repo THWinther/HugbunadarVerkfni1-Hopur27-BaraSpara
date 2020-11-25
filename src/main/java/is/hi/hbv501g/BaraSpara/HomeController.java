@@ -90,7 +90,15 @@ public class HomeController {
         SavingType sType = savingTypeService.findById(id).orElseThrow(
                 ()-> new IllegalArgumentException("Invalid SavingTypeID"));
 
+        long saveingID = sType.getId();
         savingTypeService.delete(sType);
+
+        List<Transaction> deleterList = transactionService.findBySavingTypeId(saveingID);
+        while(!deleterList.isEmpty()){
+            transactionService.delete(deleterList.get(0));
+            deleterList.remove(0);
+        }
+
         model.addAttribute("savingTypes", savingTypeService.findAll());
         return "Velkominn";
     }
