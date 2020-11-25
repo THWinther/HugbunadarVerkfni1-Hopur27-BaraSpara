@@ -20,6 +20,7 @@ a{
 .addSavingTypeForm{
     display: flex;
     flex-direction: column;
+    max-width: 18rem;
 }
 
 #title{
@@ -36,3 +37,4 @@ a{
     max-width: 30rem;
     text-align: start;
 }
+

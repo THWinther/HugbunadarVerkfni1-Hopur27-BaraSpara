@@ -158,11 +158,17 @@ public class HomeController {
     }
 
 
+    /**
+     *
+     * @param li listi
+     * @return
+     */
     public int totalTransactionAmount(List<Transaction> li){
         int amountTotal = 0;
 
         for(int i=0;i<li.size();i++){
             amountTotal += li.get(i).getAmount();
+            if(amountTotal<0) amountTotal=0;
         }
         return amountTotal;
     }
