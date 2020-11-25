@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -183,7 +183,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signUpPOST(@Valid User user, BindingResult result, Model model){
+    public String signUpPOST(User user, BindingResult result, Model model){
         if(result.hasErrors()){
             return "signup";
         }
@@ -207,7 +207,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
+    public String loginPOST(User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "login";
         }

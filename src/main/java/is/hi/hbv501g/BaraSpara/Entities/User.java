@@ -1,7 +1,8 @@
 package is.hi.hbv501g.BaraSpara.Entities;
 
+
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +19,14 @@ public class User {
 
 
     @OneToMany(mappedBy = "user")
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<SavingType> savingTypes = new ArrayList<>();
 
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public List<SavingType> getSavingTypes() {
+        return savingTypes;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
+    public void setSavingTypes(List<SavingType> savingTypes) {
+        this.savingTypes = savingTypes;
     }
 
     public User() {
