@@ -59,6 +59,9 @@ public class User {
         this.password = password;
     }
 
+
+    public User(){}
+
     public User(String uName, String password) {
         this.uName = uName;
         this.password = password;

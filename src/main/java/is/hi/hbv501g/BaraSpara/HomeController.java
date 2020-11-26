@@ -45,6 +45,7 @@ public class HomeController {
     @RequestMapping("/")
     public String Home(Model model){
         model.addAttribute("savingTypes", savingTypeService.findAll());
+        model.addAttribute("users", userService.findAll());
         return "users";
     }
 
