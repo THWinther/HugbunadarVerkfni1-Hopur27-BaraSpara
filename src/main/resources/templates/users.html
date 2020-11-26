@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
+    <link href="../static/main.css" th:href="@{/style/main.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:switch="${users}">
-    <h2 th:case="null">No movies yet!</h2>
+    <h2 th:case="null">Not logged in yet.</h2>
     <div th:case="*">
         <h2>Users</h2>
         <table>

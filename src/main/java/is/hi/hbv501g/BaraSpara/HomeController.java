@@ -29,7 +29,7 @@ public class HomeController {
 
     @Autowired
     public HomeController(SavingTypeService savingTypeService, TransactionService transactionService, UserService userService){
-        this.savingTypeService=savingTypeService;
+        this.savingTypeService = savingTypeService;
         this.transactionService = transactionService;
         this.userService = userService;
     }
@@ -45,7 +45,7 @@ public class HomeController {
     @RequestMapping("/")
     public String Home(Model model){
         model.addAttribute("savingTypes", savingTypeService.findAll());
-        return "Velkominn";
+        return "users";
     }
 
     /**
